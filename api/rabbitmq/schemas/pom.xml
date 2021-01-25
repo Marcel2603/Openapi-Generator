@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.herhold.openapi-generator</groupId>
+        <artifactId>rabbitmq</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>schemas</artifactId>
+    <name>rabbitmq-schemas</name>
+    <packaging>jar</packaging>
+    <properties>
+        <default.package>de.herhold.rabbitmq.api.schema</default.package>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.11.4</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${openapi-generator-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/../rabbit-schema.yml</inputSpec>
+                            <output>${project.buildDir}</output>
+                            <generatorName>java</generatorName>
+                            <!--generateSupportingFiles>true</generateSupportingFiles-->
+                            <generateApis>false</generateApis>
+                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <configOptions>
+
+                                <library>webclient</library>
+                                <dateLibrary>java8</dateLibrary>
+                                <modelPackage>${default.package}.schema</modelPackage>
+                                <interfaceOnly>true</interfaceOnly>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

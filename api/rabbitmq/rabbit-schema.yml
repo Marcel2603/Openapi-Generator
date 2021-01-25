@@ -1,0 +1,31 @@
+openapi: "3.0.3"
+info:
+  version: 1.0.0
+  title: DemoService Api
+servers:
+  - url: http://localhost:8080
+paths:
+  /hello:
+    get:
+      summary: Gets Hello World
+      description: tbd
+      operationId: helloWorld
+      tags:
+        - demo
+      responses:
+        '201':
+          description: hello world
+components:
+  schemas:
+    HelloQuery:
+      type: object
+      required:
+        - name
+        - exchange
+      properties:
+        name:
+          type: string
+          default: "Test"
+        exchange:
+          type: string
+          default: "Test2"
