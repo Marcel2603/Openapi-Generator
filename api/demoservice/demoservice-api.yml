@@ -1,0 +1,50 @@
+openapi: "3.0.3"
+info:
+  version: 1.0.0
+  title: DemoService Api
+servers:
+  - url: http://localhost:8080
+paths:
+  /hello:
+    get:
+      summary: Gets Hello World
+      description: tbd
+      operationId: helloWorld
+      tags:
+        - demo
+      responses:
+        '201':
+          description: hello world
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Hello"
+        default:
+          description: something bad happens
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Hello:
+      type: object
+      required:
+        - greeting
+        - name
+      properties:
+        greeting:
+          type: string
+        name:
+          type: string
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
